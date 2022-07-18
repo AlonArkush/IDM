@@ -23,7 +23,6 @@ namespace IDM.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            //DirectoryEntry directoryEntry = new DirectoryEntry("LDAP://mid2.proj");
             PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "mid1", "DC=mid1,DC=proj");
             UserPrincipal u = new UserPrincipal(ctx);
             u.GivenName = "Alon";
