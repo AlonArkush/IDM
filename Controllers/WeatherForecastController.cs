@@ -23,19 +23,24 @@ namespace IDM.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "mid1", "DC=mid1,DC=proj");
+            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "mid1", "OU=OU1,DC=mid1,DC=proj");
             UserPrincipal u = new UserPrincipal(ctx);
-            u.GivenName = "Alon";
-            u.Surname = "Arkush";
+        
+        
             PrincipalSearcher ps = new PrincipalSearcher();
             ps.QueryFilter = u;
             PrincipalSearchResult<Principal> psr = ps.FindAll();
+            UserPrincipal up = psr.ElementAt(0) as UserPrincipal;
+
             
             return Enumerable.Range(1, psr.Count()).Select(index => new WeatherForecast
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = psr.ElementAt(index - 1).Sid + ""
+                FirstName = (psr.ElementAt(index - 1) as UserPrincipal).GivenName,
+                Surname = (psr.ElementAt(index - 1) as UserPrincipal).Surname,
+                UserName = (psr.ElementAt(index - 1) as UserPrincipal).UserPrincipalName,
+                Phone = "" + (psr.ElementAt(index - 1) as UserPrincipal).VoiceTelephoneNumber,
+                Organization = ((psr.ElementAt(index - 1) as UserPrincipal).GetUnderlyingObject() as DirectoryEntry).Properties["department"].Value.ToString()
+            
             })
             .ToArray();
         }

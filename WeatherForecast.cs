@@ -2,12 +2,16 @@ namespace IDM
 {
     public class WeatherForecast
     {
-        public DateTime Date { get; set; }
+        public string? FirstName { get; set; }
 
-        public int TemperatureC { get; set; }
+        public string? Surname { get; set; }
 
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        public string? UserName { get; set; }
 
-        public string? Summary { get; set; }
+        public string? Password { get; set; }
+
+        public string? Phone { get; set; }
+
+        public string? Organization { get; set; }
     }
 }

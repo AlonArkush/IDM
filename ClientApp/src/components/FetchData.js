@@ -13,23 +13,26 @@ export class FetchData extends Component {
   }
 
   static renderForecastsTable(forecasts) {
+    console.log(forecasts[0])
     return (
       <table className='table table-striped' aria-labelledby="tabelLabel">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>First Name</th>
+            <th>Surname</th>
+            <th>Username</th>
+            <th>phone</th>
+            <th>Organization</th>
           </tr>
         </thead>
         <tbody>
           {forecasts.map(forecast =>
-            <tr key={forecast.date}>
-              <td>{forecast.date}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
+            <tr key={forecast.firstName}>
+              <td>{forecast.firstName}</td>
+              <td>{forecast.surname}</td>
+              <td>{forecast.userName}</td>
+              <td>{forecast.phone}</td>
+              <td>{forecast.organization}</td>
             </tr>
           )}
         </tbody>
