@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 
+
 export class FetchData extends Component {
   static displayName = FetchData.name;
 
   constructor(props) {
     super(props);
-    this.state = { forecasts: [], loading: true };
+    this.state = { adusers: [], loading: true };
   }
 
   componentDidMount() {
-    this.populateWeatherData();
+    this.populateADUserData();
   }
 
-  static renderForecastsTable(forecasts) {
-    console.log(forecasts[0])
+  static renderADUsersTable(adusers) {
     return (
       <table className='table table-striped' aria-labelledby="tabelLabel">
         <thead>
@@ -26,37 +26,36 @@ export class FetchData extends Component {
           </tr>
         </thead>
         <tbody>
-          {forecasts.map(forecast =>
-            <tr key={forecast.firstName}>
-              <td>{forecast.firstName}</td>
-              <td>{forecast.surname}</td>
-              <td>{forecast.userName}</td>
-              <td>{forecast.phone}</td>
-              <td>{forecast.organization}</td>
+          {adusers.map(aduser =>
+            <tr key={aduser.firstName}>
+              <td>{aduser.firstName}</td>
+              <td>{aduser.surname}</td>
+              <td>{aduser.userName}</td>
+              <td>{aduser.phone}</td>
+              <td>{aduser.organization}</td>
             </tr>
           )}
         </tbody>
       </table>
+      
     );
   }
 
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-      : FetchData.renderForecastsTable(this.state.forecasts);
+      : FetchData.renderADUsersTable(this.state.adusers);
 
     return (
       <div>
-        <h1 id="tabelLabel" >Weather forecast</h1>
-        <p>This component demonstrates fetching data from the server.</p>
         {contents}
-      </div>
+      </div>    
     );
   }
 
-  async populateWeatherData() {
-    const response = await fetch('weatherforecast');
+  async populateADUserData() {
+    const response = await fetch('aduser');
     const data = await response.json();
-    this.setState({ forecasts: data, loading: false });
+    this.setState({ adusers: data, loading: false });
   }
 }
